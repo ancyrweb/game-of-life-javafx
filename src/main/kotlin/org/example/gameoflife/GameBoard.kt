@@ -16,6 +16,31 @@ class GameBoard(private val grid: GridPane) {
     }
   }
 
+  init {
+    for (i in 0 until Config.CELLS_X) {
+      for (j in 0 until Config.CELLS_Y) {
+        val cell = cells[i][j]
+        val neighbors = mutableListOf<Cell>()
+        for (x in -1..1) {
+          for (y in -1..1) {
+            if (x == 0 && y == 0) {
+              continue
+            }
+
+            val neighborI = i + x
+            val neighborJ = j + y
+            if (neighborI < 0 || neighborI >= Config.CELLS_X || neighborJ < 0 || neighborJ >= Config.CELLS_Y) {
+              continue
+            }
+
+            neighbors.add(cells[neighborI][neighborJ])
+          }
+        }
+        cell.setNeighbors(neighbors)
+      }
+    }
+  }
+
   fun reset() {
     for (i in 0 until Config.CELLS_X) {
       for (j in 0 until Config.CELLS_Y) {
@@ -32,43 +57,8 @@ class GameBoard(private val grid: GridPane) {
     for (i in 0 until Config.CELLS_X) {
       for (j in 0 until Config.CELLS_Y) {
         val cell = cells[i][j]
-        val aliveNeighbors = getAliveNeighbors(i, j)
-        
-        if (cell.isAlive()) {
-          if (aliveNeighbors < 2 || aliveNeighbors > 3) {
-            cell.kill()
-          }
-        } else {
-          if (aliveNeighbors == 3) {
-            cell.ressurect()
-          }
-        }
+        cell.tick()
       }
     }
   }
-
-  fun getAliveNeighbors(i: Int, j: Int): Int {
-    var aliveNeighbors = 0
-    for (x in -1..1) {
-      for (y in -1..1) {
-        if (x == 0 && y == 0) {
-          continue
-        }
-
-        val neighborI = i + x
-        val neighborJ = j + y
-
-        if (neighborI < 0 || neighborI >= Config.CELLS_X || neighborJ < 0 || neighborJ >= Config.CELLS_Y) {
-          continue
-        }
-
-        if (cells[neighborI][neighborJ].isAlive()) {
-          aliveNeighbors++
-        }
-      }
-    }
-
-    return aliveNeighbors
-  }
-
 }

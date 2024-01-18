@@ -12,6 +12,7 @@ class Cell(
   private var j: Int,
   private var alive: Boolean
 ) {
+  private val neighbors = mutableListOf<Cell>()
   private val cell =
     Rectangle(
       Config.CELL_SIZE.toDouble(),
@@ -32,6 +33,23 @@ class Cell(
     }
 
     grid.add(cell, i, j)
+  }
+
+  fun setNeighbors(neighbors: List<Cell>) {
+    this.neighbors.addAll(neighbors)
+  }
+
+  fun getAliveNeighbors(): Int {
+    return neighbors.filter { it.isAlive() }.count()
+  }
+
+  fun tick() {
+    val aliveNeighbors = getAliveNeighbors()
+    if (alive && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
+      kill()
+    } else if (!alive && aliveNeighbors == 3) {
+      ressurect()
+    }
   }
 
   fun isAlive(): Boolean {
