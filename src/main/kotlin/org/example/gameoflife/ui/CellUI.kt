@@ -25,7 +25,7 @@ class CellUI(
     cell.strokeWidth = 0.5
     cell.strokeType = StrokeType.INSIDE
     cell.onMouseClicked = EventHandler {
-      if (alive) {
+      if (isAlive()) {
         kill()
       } else {
         ressurect()

@@ -42,7 +42,7 @@ class GameBoard(private val grid: GridPane) {
     }
   }
 
-  fun reset() {
+  fun shuffle() {
     for (i in 0 until Config.CELLS_X) {
       for (j in 0 until Config.CELLS_Y) {
         if (Random.nextInt(100) < 20) {
@@ -50,6 +50,14 @@ class GameBoard(private val grid: GridPane) {
         } else {
           cells[i][j].kill()
         }
+      }
+    }
+  }
+
+  fun clear() {
+    for (i in 0 until Config.CELLS_X) {
+      for (j in 0 until Config.CELLS_Y) {
+        cells[i][j].kill()
       }
     }
   }

@@ -29,8 +29,11 @@ class GameMenu(
       createMenu("Start") {
         ticker.start()
       },
-      createMenu("Reset") {
-        board.reset()
+      createMenu("Shuffle") {
+        board.shuffle()
+      },
+      createMenu("Clear") {
+        board.clear()
       }
     )
 
