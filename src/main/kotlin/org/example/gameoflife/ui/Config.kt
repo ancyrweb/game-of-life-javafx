@@ -1,4 +1,4 @@
-package org.example.gameoflife
+package org.example.gameoflife.ui
 
 class Config {
   companion object {

@@ -1,13 +1,13 @@
-package org.example.gameoflife
+package org.example.gameoflife.ui
 
 import javafx.scene.layout.GridPane
 import kotlin.random.Random
 
 class GameBoard(private val grid: GridPane) {
-  var cells: Array<Array<Cell>> = Array(Config.CELLS_X) { i ->
+  private var cells: Array<Array<CellUI>> = Array(Config.CELLS_X) { i ->
     Array(Config.CELLS_Y) { j ->
-      val isAlive = Random.nextInt(100) < 20;
-      Cell(
+      val isAlive = Random.nextInt(100) < 20
+      CellUI(
         grid,
         i,
         j,
@@ -20,7 +20,7 @@ class GameBoard(private val grid: GridPane) {
     for (i in 0 until Config.CELLS_X) {
       for (j in 0 until Config.CELLS_Y) {
         val cell = cells[i][j]
-        val neighbors = mutableListOf<Cell>()
+        val neighbors = mutableListOf<CellUI>()
         for (x in -1..1) {
           for (y in -1..1) {
             if (x == 0 && y == 0) {
@@ -36,6 +36,7 @@ class GameBoard(private val grid: GridPane) {
             neighbors.add(cells[neighborI][neighborJ])
           }
         }
+
         cell.setNeighbors(neighbors)
       }
     }

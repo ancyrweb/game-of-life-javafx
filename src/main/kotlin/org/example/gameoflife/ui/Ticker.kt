@@ -1,4 +1,4 @@
-package org.example.gameoflife
+package org.example.gameoflife.ui
 
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
@@ -14,7 +14,6 @@ class Ticker(private val board: GameBoard) {
       }
     )
   )
-
 
   init {
     timeline.cycleCount = Timeline.INDEFINITE

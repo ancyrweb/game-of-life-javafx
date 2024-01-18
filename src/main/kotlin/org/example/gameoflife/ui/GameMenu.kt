@@ -1,4 +1,4 @@
-package org.example.gameoflife
+package org.example.gameoflife.ui
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler

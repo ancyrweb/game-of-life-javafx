@@ -6,6 +6,9 @@ import javafx.scene.control.MenuBar
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.GridPane
 import javafx.stage.Stage
+import org.example.gameoflife.ui.GameBoard
+import org.example.gameoflife.ui.GameMenu
+import org.example.gameoflife.ui.Ticker
 
 class HelloApplication : Application() {
   private lateinit var board: GameBoard
